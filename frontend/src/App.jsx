@@ -9,7 +9,6 @@ function App() {
 
   const products = useSelector((state) => state.products.items);
 
-  // 👇 ADD THIS LINE
   const cartItems = useSelector((state) => state.cart.items);
 
   const [name, setName] = useState("");
@@ -24,7 +23,9 @@ function App() {
       })
     );
   };
-
+const total = cartItems.reduce((sum, item) => {
+  return sum + item.price;
+}, 0);
   return (
     <div>
       <input
@@ -45,6 +46,7 @@ function App() {
       </button>
 
       <h3>Cart Items: {cartItems.length}</h3>
+      <h3>Total: ₹{total}</h3>
 
       {products.map((product) => (
         <div key={product.id}>
